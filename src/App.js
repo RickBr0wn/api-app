@@ -1,10 +1,11 @@
-import React, { Component } from 'react';
+import React from 'react';
+import DataWindow from './Components/DataWindow'
 
-class App extends Component {
+class App extends React.Component {
   render() {
     return (
       <div >
-        
+        <DataWindow />
       </div>
     );
   }
