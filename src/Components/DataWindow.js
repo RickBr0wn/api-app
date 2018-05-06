@@ -11,13 +11,18 @@ class DataWindow extends React.Component{
   }
 
   componentDidMount() {
-    fetch("https://randomuser.me/api/?nat=gb")
+    const proxyUrl = 'https://cors-anywhere.herokuapp.com/'
+    const targetUrl = 'https://api.forismatic.com/api/1.0/?method=getQuote&format=json&lang=en'
+    fetch(proxyUrl + targetUrl)
       .then(res => res.json())
       .then(
         (result) => {
+          console.log(result)
           this.setState({
             isLoaded: true,
-            results: result.results[0]
+            quotes: result,
+            quoteAuthor: result.quoteAuthor,
+            quoteText: result.quoteText
           });
         },
         // Note: it's important to handle errors here
@@ -33,21 +38,20 @@ class DataWindow extends React.Component{
   }
 
   render(){
-    const { error, isLoaded, results } = this.state;
+    const { error, isLoaded, quoteAuthor, quoteText } = this.state;
     if (error) {
       return <div>Error: {error.message}</div>;
     } else if (!isLoaded) {
       return <div>Loading API Data...</div>;
     } else {
-      console.log(results)
       return (
         <ul>
-          {results.map(person => (
-            <li key={person.id.name}>
-              {person.id.name} 
-              {/* {item.price} */}
-            </li>
-          ))}
+          <li>
+            {quoteText}
+          </li>
+          <li>
+            {quoteAuthor}
+          </li>
         </ul>
       );
     }
