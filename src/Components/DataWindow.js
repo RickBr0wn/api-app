@@ -13,6 +13,8 @@ class DataWindow extends React.Component{
   componentDidMount() {
     const proxyUrl = 'https://cors-anywhere.herokuapp.com/'
     const targetUrl = 'https://api.forismatic.com/api/1.0/?method=getQuote&format=json&lang=en'
+    const colors = ["#A7BED3", "#C6E2E9", "#F1FFC4", "#FFCAAF", "#DAB894", "#DCEDB9", "#CBD081", "#918868", "#3A405A", "#F9DEC9", "#99B2DD", "#E9AFA3", "#685044", "#474A2C", "#636940", "#59A96A", "#B4E7CE", "#A0ECD0", "#94DDBC", "#714955", "#B4E7CE"];
+    const fonts = ["#000", "#000", "#000", "#000", "#000", "#000", "#000", "#fff", "#fff", "#000", "#000", "#000", "#fff", "#fff", "#fff", "#fff", "#000", "#000", "#000", "#fff", "#000"];
     fetch(proxyUrl + targetUrl)
       .then(res => res.json())
       .then(
@@ -21,7 +23,9 @@ class DataWindow extends React.Component{
           this.setState({
             isLoaded: true,
             quoteAuthor: result.quoteAuthor,
-            quoteText: result.quoteText
+            quoteText: result.quoteText,
+            colors,
+            fonts
           });
         },
         // Note: it's important to handle errors here
@@ -49,7 +53,7 @@ class DataWindow extends React.Component{
             <li>
               {quoteText}
             </li>
-            <li style={}>
+            <li>
               {quoteAuthor}
             </li>
           </ul>
