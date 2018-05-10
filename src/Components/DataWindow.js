@@ -20,7 +20,6 @@ class DataWindow extends React.Component{
           console.log(result)
           this.setState({
             isLoaded: true,
-            quotes: result,
             quoteAuthor: result.quoteAuthor,
             quoteText: result.quoteText
           });
@@ -45,14 +44,16 @@ class DataWindow extends React.Component{
       return <div>Loading API Data...</div>;
     } else {
       return (
-        <ul>
-          <li>
-            {quoteText}
-          </li>
-          <li>
-            {quoteAuthor}
-          </li>
-        </ul>
+        <div className="container">
+          <ul>
+            <li>
+              {quoteText}
+            </li>
+            <li style={}>
+              {quoteAuthor}
+            </li>
+          </ul>
+        </div>
       );
     }
   }
